@@ -22,8 +22,7 @@ import java.util.List;
  * @author duohuo-jinghao
  *
  */
-public class BaseActivity extends FragmentActivity implements
-        ActivityCompat.OnRequestPermissionsResultCallback {
+public class BaseActivity extends FragmentActivity {
 
     private ActivityTack tack = ActivityTack.getInstanse();
 
@@ -71,16 +70,16 @@ public class BaseActivity extends FragmentActivity implements
     @Override
     protected void onResume() {
         super.onResume();
-        if (Build.VERSION.SDK_INT >= 23 && isNeedCheck) {
+       /* if (Build.VERSION.SDK_INT >= 23 && isNeedCheck) {
             checkPermissions(needPermissions);
-        }
+        }*/
     }
 
     /**
      * @param permissions
      * @since 2.5.0
      */
-    private void checkPermissions(String[] permissions) {
+  /*  private void checkPermissions(String[] permissions) {
         List<String> needRequestPermissonList = findDeniedPermissions(permissions);
         if (null != needRequestPermissonList
                 && needRequestPermissonList.size() > 0) {
@@ -89,7 +88,7 @@ public class BaseActivity extends FragmentActivity implements
                             new String[needRequestPermissonList.size()]),
                     PERMISSON_REQUESTCODE);
         }
-    }
+    }*/
 
     /**
      * 获取权限集中需要申请权限的列表
@@ -98,7 +97,7 @@ public class BaseActivity extends FragmentActivity implements
      * @return
      * @since 2.5.0
      */
-    private List<String> findDeniedPermissions(String[] permissions) {
+   /* private List<String> findDeniedPermissions(String[] permissions) {
         List<String> needRequestPermissonList = new ArrayList<String>();
         for (String perm : permissions) {
             if (ContextCompat.checkSelfPermission(this,
@@ -109,7 +108,7 @@ public class BaseActivity extends FragmentActivity implements
             }
         }
         return needRequestPermissonList;
-    }
+    }*/
 
     /**
      * 检测是否说有的权限都已经授权
