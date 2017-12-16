@@ -1,7 +1,6 @@
 package net.duohuo.dhroid.activity;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -9,12 +8,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 
 import net.duohuo.dhroid.Const;
-import net.duohuo.dhroid.R;
 import net.duohuo.dhroid.ioc.InjectUtil;
 
 import java.util.ArrayList;
@@ -25,7 +22,7 @@ import java.util.List;
  * @author duohuo-jinghao
  *
  */
-public class BaseActivity extends AppCompatActivity implements
+public class BaseActivity extends FragmentActivity implements
         ActivityCompat.OnRequestPermissionsResultCallback {
 
     private ActivityTack tack = ActivityTack.getInstanse();
@@ -130,7 +127,7 @@ public class BaseActivity extends AppCompatActivity implements
         return true;
     }
 
-    @Override
+   /* @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String[] permissions, int[] paramArrayOfInt) {
         if (requestCode == PERMISSON_REQUESTCODE) {
@@ -141,11 +138,11 @@ public class BaseActivity extends AppCompatActivity implements
         }
     }
 
-    /**
+    *//**
      * 显示提示信息
      *
      * @since 2.5.0
-     */
+     *//*
     private void showMissingPermissionDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.notifyTitle);
@@ -171,7 +168,7 @@ public class BaseActivity extends AppCompatActivity implements
         builder.setCancelable(false);
 
         builder.show();
-    }
+    }*/
 
     /**
      * 启动应用的设置
