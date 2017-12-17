@@ -21,17 +21,17 @@ import net.duohuo.dhroid.net.request.BaseRequest;
 
 public abstract class NormalCallBack<T> extends AbsCallback<T> {
 
-	IDialog dialog;
+	public IDialog dialog;
 
-	Context mContext;
+	public Context mContext;
 
 	boolean showDialog = true;
 
 	String loadMsg = "加载中...";
 
-	BaseRequest request;
+	public BaseRequest request;
 
-	Dialog progressDialog;
+	public Dialog progressDialog;
 
 	public NormalCallBack(Context context) {
 		mContext = context;

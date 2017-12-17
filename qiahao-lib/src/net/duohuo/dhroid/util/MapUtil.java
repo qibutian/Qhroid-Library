@@ -1,5 +1,7 @@
 package net.duohuo.dhroid.util;
 
+import java.io.IOException;
+import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -12,6 +14,11 @@ import org.json.JSONObject;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -223,12 +230,37 @@ public class MapUtil {
 		}
 	}
 
+	@SuppressWarnings({ "unchecked", "unchecked" })
 	public static Map<String, Object> getMap(String result) {
-		Gson gson = new Gson();
 
-		Map<String, Object> data = gson.fromJson(result,
-				new TypeToken<Map<String, Object>>() {
-				}.getType());
+		ObjectMapper mapper = DhUtil.getDefaultObjectMapper();
+
+		// JavaType type = mapper.getTypeFactory().constructType(
+		// ((ParameterizedType) getClass().getGenericSuperclass())
+		// .getActualTypeArguments()[0]);
+
+		Map<String, Object> data = null;
+		try {
+			data = (Map<String, Object>) mapper.readValue(result,
+					new TypeReference<Map<String, Object>>() {
+					});
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		//
+		// Gson gson = new Gson();
+		//
+		// Map<String, Object> data = gson.fromJson(result,
+		// new TypeToken<Map<String, Object>>() {
+		// }.getType());
 
 		return data;
 	}
