@@ -98,9 +98,14 @@ public abstract class BeanCallBack<T> extends NormalCallBack<DResponse<T>> {
         // } else {
         // gson = new Gson();
         // }
-
-        boolean isSuccess = JSONUtil.getString(jo, Const.response_success)
+        boolean isSuccess = true;
+        if (jo != null) {
+            if (jo.has(Const.response_success)) {
+                isSuccess = JSONUtil.getString(jo, Const.response_success)
                 .equals(Const.response_success_result);
+            }
+        }
+        
 
         if (isSuccess) {
             if (!TextUtils.isEmpty(fromWhat)) {

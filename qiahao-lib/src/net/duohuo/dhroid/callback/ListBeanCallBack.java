@@ -71,8 +71,13 @@ public abstract class ListBeanCallBack<T> extends NormalCallBack<DResponse<T>> {
 		JSONObject jo = new JSONObject(result);
 		// Gson gson = new Gson();
 
-		boolean isSuccess = JSONUtil.getString(jo, Const.response_success)
-				.equals(Const.response_success_result);
+		boolean isSuccess = true;
+        if (jo != null) {
+            if (jo.has(Const.response_success)) {
+                isSuccess = JSONUtil.getString(jo, Const.response_success)
+                .equals(Const.response_success_result);
+            }
+        }
 
 		String str;
 
