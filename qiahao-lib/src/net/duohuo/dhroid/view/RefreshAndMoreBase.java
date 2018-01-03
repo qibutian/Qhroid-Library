@@ -3,6 +3,7 @@ package net.duohuo.dhroid.view;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
+import in.srain.cube.views.ptr.PtrUIHandler;
 import in.srain.cube.views.ptr.header.StoreHouseHeader;
 import in.srain.cube.views.ptr.loadmore.LoadMoreContainer;
 import in.srain.cube.views.ptr.loadmore.LoadMoreContainerBase;
@@ -20,6 +21,7 @@ import net.duohuo.dhroid.net.model.DResponse;
 import net.duohuo.dhroid.util.DhUtil;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,9 +73,14 @@ public abstract class RefreshAndMoreBase<T> extends LinearLayout {
 //		header.initWithString("GUOHUAI");
 //		header.setTextColor(getResources().getColor(R.color.text_hui999999));
 		headView = IocContainer.getShare().get(IRefreshHeaderView.class);
+		View header = headView.getHeaderView(mContext);
+		mPtrFrame.setHeaderView(header);
+		if(header instanceof PtrUIHandler){
+			mPtrFrame.addPtrUIHandler((PtrUIHandler) header);
+		}else {
+			Log.e("RefreshAndMoreBase","headview设置错误-----------------");
+		}
 		mPtrFrame.disableWhenHorizontalMove(true);
-		mPtrFrame.addPtrUIHandler(headView.getHandler());
-		mPtrFrame.setHeaderView(headView.getHeaderView());
 		mPtrFrame.setPinContent(false);
 	}
 
