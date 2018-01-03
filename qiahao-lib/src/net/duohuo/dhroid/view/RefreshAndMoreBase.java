@@ -14,6 +14,8 @@ import net.duohuo.dhroid.R;
 import net.duohuo.dhroid.adapter.INetAdapter;
 import net.duohuo.dhroid.adapter.INetAdapter.LoadSuccessCallBack;
 import net.duohuo.dhroid.adapter.NetBeanAdapter;
+import net.duohuo.dhroid.dialog.IDialog;
+import net.duohuo.dhroid.ioc.IocContainer;
 import net.duohuo.dhroid.net.model.DResponse;
 import net.duohuo.dhroid.util.DhUtil;
 import android.content.Context;
@@ -44,6 +46,8 @@ public abstract class RefreshAndMoreBase<T> extends LinearLayout {
 	public OnEmptyListenser onEmptyListenser;
 
 	public View loadMoreV;
+	IRefreshHeaderView headView;
+
 
 	public RefreshAndMoreBase(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -61,14 +65,15 @@ public abstract class RefreshAndMoreBase<T> extends LinearLayout {
 	public abstract void initView();
 
 	public void setHeadView() {
-		final StoreHouseHeader header = new StoreHouseHeader(mContext);
-		header.setPadding(0, DhUtil.dip2px(mContext, 15), 0,
-				DhUtil.dip2px(mContext, 10));
-		header.initWithString("GUOHUAI");
-		header.setTextColor(getResources().getColor(R.color.text_hui999999));
+//		final StoreHouseHeader header = new StoreHouseHeader(mContext);
+//		header.setPadding(0, DhUtil.dip2px(mContext, 15), 0,
+//				DhUtil.dip2px(mContext, 10));
+//		header.initWithString("GUOHUAI");
+//		header.setTextColor(getResources().getColor(R.color.text_hui999999));
+		headView = IocContainer.getShare().get(IRefreshHeaderView.class);
 		mPtrFrame.disableWhenHorizontalMove(true);
-		mPtrFrame.addPtrUIHandler(header);
-		mPtrFrame.setHeaderView(header);
+		mPtrFrame.addPtrUIHandler(headView.getHandler());
+		mPtrFrame.setHeaderView(headView.getHeaderView());
 		mPtrFrame.setPinContent(false);
 	}
 
